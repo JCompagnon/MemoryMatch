@@ -28,9 +28,32 @@
     <DebugSymbols>true</DebugSymbols>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="common\models\high-score.js" />
     <Compile Include="server.js" />
+    <Compile Include="server\boot\root.js" />
+    <Compile Include="server\server.js" />
+    <Content Include=".editorconfig" />
+    <Content Include=".eslintignore" />
+    <Content Include=".eslintrc" />
+    <Content Include=".gitignore" />
+    <Content Include=".yo-rc.json" />
+    <Content Include="client\README.md" />
+    <Content Include="common\models\high-score.json" />
     <Content Include="package.json" />
     <Content Include="README.md" />
+    <Content Include="server\component-config.json" />
+    <Content Include="server\config.json" />
+    <Content Include="server\datasources.json" />
+    <Content Include="server\middleware.development.json" />
+    <Content Include="server\middleware.json" />
+    <Content Include="server\model-config.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="client\" />
+    <Folder Include="common\" />
+    <Folder Include="common\models\" />
+    <Folder Include="server\" />
+    <Folder Include="server\boot\" />
   </ItemGroup>
   <!-- Do not delete the following Import Project.  While this appears to do nothing it is a marker for setting TypeScript properties before our import that depends on them. -->
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" Condition="False" />

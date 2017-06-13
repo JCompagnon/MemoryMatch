@@ -1,9 +1,0 @@
-{
-  "name": "memory-match",
-  "version": "0.0.0",
-  "description": "MemoryMatch",
-  "main": "server.js",
-  "author": {
-    "name": "Jonathan"
-  }
-}

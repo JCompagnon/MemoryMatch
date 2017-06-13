@@ -1,0 +1,12 @@
+﻿{
+  "highScores": {
+    //"host": "",
+    //"port": 0,
+    "url": "",
+    "database": "highScores",
+    "password": "",
+    "name": "highScores",
+    "user": "",
+    "connector": "mongodb"
+  }
+}
