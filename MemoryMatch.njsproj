@@ -30,13 +30,16 @@
   <ItemGroup>
     <Compile Include="common\models\high-score.js" />
     <Compile Include="server.js" />
-    <Compile Include="server\boot\root.js" />
+    <Compile Include="server\boot\root.djs" />
     <Compile Include="server\server.js" />
     <Content Include=".editorconfig" />
     <Content Include=".eslintignore" />
     <Content Include=".eslintrc" />
     <Content Include=".gitignore" />
     <Content Include=".yo-rc.json" />
+    <Content Include="client\index.html">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="client\README.md" />
     <Content Include="common\models\high-score.json" />
     <Content Include="package.json" />
