@@ -1,4 +1,4 @@
-{
+﻿{
   "_meta": {
     "sources": [
       "loopback/common/models",
@@ -15,6 +15,10 @@
   },
   "highScore": {
     "dataSource": "highScores",
+    "public": true
+  },
+  "gameImage": {
+    "dataSource": "appmemory",
     "public": true
   }
 }

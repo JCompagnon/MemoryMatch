@@ -1,12 +1,18 @@
 ﻿{
   "highScores": {
-    //"host": "",
-    //"port": ,
+    "host": "Gungnir",
+    "port": 27017,
     "url": "",
     "database": "highScores",
     "password": "",
     "name": "highScores",
     "user": "",
     "connector": "mongodb"
+  },
+  "appmemory": {
+    "name": "appmemory",
+    "localStorage": "appmemory",
+    "file": "",
+    "connector": "memory"
   }
 }

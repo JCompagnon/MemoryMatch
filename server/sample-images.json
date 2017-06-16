@@ -1,0 +1,23 @@
+﻿{
+  "gameImageFields": {
+    "ids": [ "a", "b", "c", "d", "e", "f", "g" ],
+    "themes": [
+      [ "theme-a" ],
+      [ "theme-a" ],
+      [ "theme-b" ],
+      [ "theme-b" ],
+      [ "theme-c" ],
+      [ "theme-c" ],
+      [ "theme-c" ]
+    ],
+    "urls": [
+      "urlFor-a" ,
+       "urlFor-b" ,
+       "urlFor-c" ,
+       "urlFor-d" ,
+       "urlFor-e" ,
+       "urlFor-f" ,
+       "urlFor-g" 
+    ]
+  }
+}
