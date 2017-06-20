@@ -1,42 +1,33 @@
 ﻿'use strict';
 
-const images = [];
+module.exports = function (GameImage) {
 
-class GameImage {
-    constructor(id, theme, url) {
-        this.id = id;
-        this.theme = theme;
-        this.url = url;
-    }
-}
+    GameImage.remoteMethod('getImages', {
+        accepts: [{ arg: 'number', type: 'number' }, { arg: 'theme', type: 'string' }],
+        returns: { arg: 'result', type: 'array' }
+    });
 
-module.exports = function (memoryDB) {
-
-    if (images.length === 0) {
-        //let fs = require('fs');
-        //let sampleImages;
-        //fs.readFile("server/sample-images.json", (err, data) => {
-        //    if (err) throw err;
-        //    sampleImages = JSON.parse(data);
-
-
-        //});
-        let sampleImages = require('../../server/sample-images.json').gameImageFields;
-        for (let x = 0; x < sampleImages.ids.length; x++) {
-            let sampleGameImage = new GameImage(sampleImages["ids"][x], sampleImages["themes"][x], sampleImages["urls"][x]);
-            images.push(sampleGameImage);
-        }
-    }
-
-    return {
-        //what are you talking about I totally know what I'm doing
-        getImages: (number, theme) => {
-            let themedPics = images.filter((image)=>image["theme"].indexOf(theme)!=-1) || [];
-            if (number > themedPics.length) {
-                throw {};
+    GameImage.getImages = function (number, theme, cb) {
+        //what are you talking about I totally know what I'm doing         
+        var themedPics = GameImage.find({ where: { theme: theme }, limit: number }, function (err, pics) {
+            if (pics.length < number) {
+                //do some horrible mumbo jumbo. throw error? have multiples of the existing cards?
+                //Also, are we looking at Plane A matching with Plane A, or Plane A with Plane B?
             }
-            return themedPics.splice(0, number);
-        },
-        getImage: (id) => images.find({ id })
-    }
+            //TODO: add randomizing code
+            //now that it's here do we want it here? this might be more game app logic than api's concern... welp... here we are
+            //reference https://blog.codinghorror.com/the-danger-of-naivete/
+            let counter = pics.length;
+            for (let i = 0; i < pics.length; i++) {
+                let index = Math.floor(Math.random() * counter);
+                counter--;
+
+                let temp = pics[counter];
+                pics[counter] = pics[index];
+                pics[index] = temp;
+            }
+
+            cb(null, pics);
+        });
+    };   
 };

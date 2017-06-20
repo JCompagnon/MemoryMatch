@@ -29,14 +29,9 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="common\models\game-image.js" />
-    <Compile Include="common\models\high-score.js" />
-    <Compile Include="server.js" />
+    <Compile Include="common\models\score.js" />
     <Compile Include="server\boot\routes.js">
       <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="server\routes\game-image.js">
-      <SubType>Code</SubType>
-      <TestFramework>ExportRunner</TestFramework>
     </Compile>
     <Compile Include="server\sample-images.json">
       <SubType>Code</SubType>
@@ -52,7 +47,7 @@
     </Content>
     <Content Include="client\README.md" />
     <Content Include="common\models\game-image.json" />
-    <Content Include="common\models\high-score.json" />
+    <Content Include="common\models\score.json" />
     <Content Include="package.json" />
     <Content Include="README.md" />
     <Content Include="server\component-config.json" />

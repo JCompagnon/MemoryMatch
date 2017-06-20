@@ -13,7 +13,7 @@
       "./mixins"
     ]
   },
-  "highScore": {
+  "score": {
     "dataSource": "highScores",
     "public": true
   },

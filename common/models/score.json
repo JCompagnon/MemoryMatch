@@ -1,5 +1,5 @@
-{
-  "name": "highScore",
+﻿{
+  "name": "score",
   "base": "PersistedModel",
   "idInjection": true,
   "options": {
