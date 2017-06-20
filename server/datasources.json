@@ -1,7 +1,7 @@
 ﻿{
   "highScores": {
-    "host": "Gungnir",
-    "port": 27017,
+    "host": "",
+    "port": ,
     "url": "",
     "database": "highScores",
     "password": "",
