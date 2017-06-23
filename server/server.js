@@ -26,21 +26,4 @@ boot(app, __dirname, function (err) {
     // start the server if `$ node server.js`
     if (require.main === module)
         app.start();
-
-    loadSessionData(app);
 });
-
-function loadSessionData(app) {
-    let images = app.models.gameImage;
-
-    images.count(null, function (err, count) {
-        if (err) throw err;
-        if (count == 0) {
-            let sampleImages = require('../server/sample-images.json').gameImageFields;
-            for (let x = 0; x < sampleImages.ids.length; x++) {
-                let sampleGameImage = { id: sampleImages["ids"][x], theme: sampleImages["themes"][x], sourceurl: sampleImages["urls"][x] };
-                images.create(sampleGameImage);
-            }
-        }
-    });
-}

@@ -1,15 +1,15 @@
 ﻿'use strict';
 
-module.exports = function (GameImage) {
+module.exports = function (GameImages) {
 
-    GameImage.remoteMethod('getImages', {
+    GameImages.remoteMethod('getImages', {
         accepts: [{ arg: 'number', type: 'number' }, { arg: 'theme', type: 'string' }],
         returns: { arg: 'result', type: 'array' }
     });
 
-    GameImage.getImages = function (number, theme, cb) {
+    GameImages.getImages = function (number, theme, cb) {
         //what are you talking about I totally know what I'm doing         
-        var themedPics = GameImage.find({ where: { theme: theme }, limit: number }, function (err, pics) {
+        var themedPics = GameImages.find({ where: { themes: theme }, limit: number }, function (err, pics) {
             if (pics.length < number) {
                 //do some horrible mumbo jumbo. throw error? have multiples of the existing cards?
                 //Also, are we looking at Plane A matching with Plane A, or Plane A with Plane B?

@@ -13,11 +13,11 @@
       "./mixins"
     ]
   },
-  "score": {
+  "Scores": {
     "dataSource": "highScores",
     "public": true
   },
-  "gameImage": {
+  "GameImages": {
     "dataSource": "appmemory",
     "public": true
   }

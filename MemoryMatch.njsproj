@@ -28,9 +28,13 @@
     <DebugSymbols>true</DebugSymbols>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="common\models\game-image.js" />
-    <Compile Include="common\models\score.js" />
-    <Compile Include="server\boot\routes.js">
+    <Compile Include="client\index.js">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="client\vue.js" />
+    <Compile Include="common\models\game-images.js" />
+    <Compile Include="common\models\scores.js" />
+    <Compile Include="server\boot\loadImages.js">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="server\sample-images.json">
@@ -42,12 +46,15 @@
     <Content Include=".eslintrc" />
     <Content Include=".gitignore" />
     <Content Include=".yo-rc.json" />
+    <Content Include="client\index.css">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="client\index.html">
       <SubType>Code</SubType>
     </Content>
     <Content Include="client\README.md" />
-    <Content Include="common\models\game-image.json" />
-    <Content Include="common\models\score.json" />
+    <Content Include="common\models\game-images.json" />
+    <Content Include="common\models\scores.json" />
     <Content Include="package.json" />
     <Content Include="README.md" />
     <Content Include="server\component-config.json" />

@@ -1,18 +1,19 @@
 ﻿{
-  "name": "score",
+  "name": "GameImages",
   "base": "PersistedModel",
   "idInjection": true,
   "options": {
     "validateUpsert": true
   },
   "properties": {
-    "score": {
-      "type": "number",
-      "required": true,
-      "default": 0
-    },
-    "player": {
+    "sourceurl": {
       "type": "string",
+      "required": true
+    },
+    "themes": {
+      "type": [
+        "string"
+      ],
       "required": true
     }
   },

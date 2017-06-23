@@ -1,18 +1,18 @@
-﻿<head>
-    <meta charset="utf-8" />
-    <title>Loopback demo</title>
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Loopback demo</title>
+  <script src="vue.js"></script>
+  <script src="index.js"></script>
+  <link rel="stylesheet" href="index.css" />
 </head>
 <body>
-  <h3>Hello World!</h3>
-
-  <p>And a further hello to the Whip</p>
-
-  <script>
-    //Ehhh
-    function goOnWithYa() {
-      document.location.href = "/explorer";
-    };
-
-    setTimeout(goOnWithYa, 2000);
-  </script>
+  <div id="app">
+    <h3>{{ hello }}</h3>
+    <span>
+      {{ welcome }}
+    </span>
+  </div>
 </body>
+</html>
