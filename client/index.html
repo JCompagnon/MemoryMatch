@@ -4,15 +4,54 @@
   <meta charset="utf-8" />
   <title>Loopback demo</title>
   <script src="vue.js"></script>
-  <script src="index.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
   <link rel="stylesheet" href="index.css" />
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 </head>
 <body>
-  <div id="app">
-    <h3>{{ hello }}</h3>
-    <span>
-      {{ welcome }}
-    </span>
+  <script type="text/javascript">
+    Vue.component('custom-ddl', {
+      props: ['item'],
+      template: '<option> Hey </option>'
+    });
+  </script>
+
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12 header">
+
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-3 leftbar">
+        &nbsp;
+      </div>
+      <div class="col-md-6 maincontent">
+        <div id="app">
+          <div class="row"><div class="col-md-12"><h3>{{ titleLabel }}</h3></div></div>
+
+          <div class="row">
+            <div class="col-md-6"><input type="text" v-bind="playerName" /></div>
+            <div class="col-md-6">
+              <select v-model="selectedDiff">
+                <option disabled>Please select a difficulty</option>
+                <option v-for="diff in difficulties" v-bind:value="diff.id"> {{ diff.text }} </option>
+              </select>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-6 center">
+              <button v:onclick=""> {{ newGameLabel }}</button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <div class="col-md-3 rightbar">
+        &nbsp;
+      </div>
+    </div>
+    <script src="index.js"></script>
   </div>
 </body>
 </html>

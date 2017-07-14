@@ -27,6 +27,15 @@ module.exports = function (GameImages) {
                 pics[index] = temp;
             }
 
+            //themedPics.map(function GetElementsFromArray(item) {
+            //    if (item.isArray) {
+            //        item.map(GetElementsFromArray);
+            //    }
+            //    else {
+            //        return item;
+            //    }
+            //});
+
             cb(null, pics);
         });
     };   
