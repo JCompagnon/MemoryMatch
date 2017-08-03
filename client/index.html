@@ -9,17 +9,10 @@
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 </head>
 <body>
-  <script type="text/javascript">
-    Vue.component('custom-ddl', {
-      props: ['item'],
-      template: '<option> Hey </option>'
-    });
-  </script>
-
   <div class="container-fluid">
     <div class="row">
-      <div class="col-md-12 header">
-
+      <div class="col-md-12 header ">
+        &nbsp;
       </div>
     </div>
     <div class="row">
@@ -28,30 +21,56 @@
       </div>
       <div class="col-md-6 maincontent">
         <div id="app">
-          <div class="row"><div class="col-md-12"><h3>{{ titleLabel }}</h3></div></div>
+          <div class="row"><div class="col-md-12 form-label"><h3>{{ titleLabel }}</h3></div></div>
 
-          <div class="row">
-            <div class="col-md-6"><input type="text" v-bind="playerName" /></div>
-            <div class="col-md-6">
-              <select v-model="selectedDiff">
-                <option disabled>Please select a difficulty</option>
-                <option v-for="diff in difficulties" v-bind:value="diff.id"> {{ diff.text }} </option>
-              </select>
+          <div class="menu row" v-if="currentScreen === 'menu'">
+            <div class="col-lg-6">
+              <div class="row">
+                <div class="col-md-12 form-group">
+                  <input class="form-control" type="text" v-bind="playerName" placeholder="Name..." />
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12 form-group">
+                  <select v-model="selectedDiff" class="form-control">
+                    <option disabled>Please select a difficulty</option>
+                    <option v-for="diff in difficulties" v-bind:value="diff.id"> {{ diff.text }} </option>
+                  </select>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-12 center form-group">
+                  <button class="btn btn-primary form-control" v-on:click="startGame"> {{ newGameLabel }}</button>
+                </div>
+              </div>
             </div>
           </div>
-          <div class="row">
-            <div class="col-sm-6 center">
-              <button v:onclick=""> {{ newGameLabel }}</button>
+
+          <div class="gameboard row" v-if="currentScreen === 'game'">
+            <div class="col-sm-6">
+              <div class="row">
+                <div v-if="gameInfo.imagecount" class="col-sm-12 form-group">
+                  <p >{{ gameInfo.imagecount }} images received</p>
+                  <p v-for="image in gameInfo.images">{{ image.sourceurl }}</p>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-12 form-group">
+                  <button class="btn btn-warning form-control" v-on:click="quitGame"> {{ quitGameLabel }}</button>
+                </div>
+              </div>
+
             </div>
+
           </div>
 
         </div>
+
+        <div class="col-md-3 rightbar">
+          &nbsp;
+        </div>
       </div>
-      <div class="col-md-3 rightbar">
-        &nbsp;
-      </div>
+      <script src="index.js"></script>
     </div>
-    <script src="index.js"></script>
-  </div>
 </body>
 </html>

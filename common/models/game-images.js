@@ -9,32 +9,20 @@ module.exports = function (GameImages) {
 
     GameImages.getImages = function (number, theme, cb) {
         //what are you talking about I totally know what I'm doing         
-        var themedPics = GameImages.find({ where: { themes: theme }, limit: number }, function (err, pics) {
-            if (pics.length < number) {
-                //do some horrible mumbo jumbo. throw error? have multiples of the existing cards?
-                //Also, are we looking at Plane A matching with Plane A, or Plane A with Plane B?
-            }
+        //var themedPics = 
+        GameImages.find({ where: { themes: theme }, limit: number }, function (err, pics) {            
             //TODO: add randomizing code
             //now that it's here do we want it here? this might be more game app logic than api's concern... welp... here we are
             //reference https://blog.codinghorror.com/the-danger-of-naivete/
-            let counter = pics.length;
-            for (let i = 0; i < pics.length; i++) {
-                let index = Math.floor(Math.random() * counter);
-                counter--;
+            //let counter = pics.length;
+            //for (let i = 0; i < pics.length; i++) {
+            //    let index = Math.floor(Math.random() * counter);
+            //    counter--;
 
-                let temp = pics[counter];
-                pics[counter] = pics[index];
-                pics[index] = temp;
-            }
-
-            //themedPics.map(function GetElementsFromArray(item) {
-            //    if (item.isArray) {
-            //        item.map(GetElementsFromArray);
-            //    }
-            //    else {
-            //        return item;
-            //    }
-            //});
+            //    let temp = pics[counter];
+            //    pics[counter] = pics[index];
+            //    pics[index] = temp;
+            //}
 
             cb(null, pics);
         });
