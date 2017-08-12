@@ -1,3 +1,34 @@
 ﻿.menu > .row{
   
 }
+
+.p-5{
+  padding:.5em
+}
+
+.obscured{
+  background-color:blanchedalmond;
+  background-clip:content-box;
+  border-radius:5px;
+}
+
+.obscured > img{
+  visibility:hidden
+}
+
+/*img{
+  height:100%;width:100%;
+}
+.imagecontainer {
+    height: 180px
+  }*/
+/*@media (max-width: 1199px){
+  
+}
+@media (min-resolution: 1200px) {
+  .imagecontainer {
+    height: 15em !important;
+
+  note: height-480 looks fine on phones, height-300 probably better for desktop
+  }
+}*/

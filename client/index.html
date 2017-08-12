@@ -21,7 +21,13 @@
       </div>
       <div class="col-md-6 maincontent">
         <div id="app">
-          <div class="row"><div class="col-md-12 form-label"><h3>{{ titleLabel }}</h3></div></div>
+          <div class="row">
+            <div class="col-md-12 form-label">
+              <h3>{{ titleLabel }}</h3>
+            </div>
+          </div>
+
+          <div id="imgModal" class="modal"></div>
 
           <div class="menu row" v-if="currentScreen === 'menu'">
             <div class="col-lg-6">
@@ -47,11 +53,15 @@
           </div>
 
           <div class="gameboard row" v-if="currentScreen === 'game'">
-            <div class="col-sm-6">
+            <div class="col-sm-12">
               <div class="row">
                 <div v-if="gameInfo.imagecount" class="col-sm-12 form-group">
-                  <p >{{ gameInfo.imagecount }} images received</p>
-                  <p v-for="image in gameInfo.images">{{ image.sourceurl }}</p>
+                  <p>{{ gameInfo.imagecount }} images received</p>
+                  <div class="row">
+                    <div v-for="image in gameInfo.images" v-on:click="selectImage" class="col-xs-6 col-md-3 p-5 obscured imagecontainer">
+                      <img class="img-responsive" :src="image.sourceurl" :alt="image.sourceurl" v-bind:id="image.id"/>
+                    </div>
+                  </div>
                 </div>
               </div>
               <div class="row">
@@ -63,7 +73,6 @@
             </div>
 
           </div>
-
         </div>
 
         <div class="col-md-3 rightbar">
@@ -71,6 +80,7 @@
         </div>
       </div>
       <script src="index.js"></script>
+    </div>
     </div>
 </body>
 </html>

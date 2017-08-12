@@ -9,6 +9,16 @@
     "user": "",
     "connector": "mongodb"
   },
+  "gameimages": {
+    "host": "localhost",
+    "port": 27017,
+    "url": "",
+    "database": "gameimages",
+    "password": "",
+    "name": "gameimages",
+    "user": "",
+    "connector": "mongodb"
+  },
   "appmemory": {
     "name": "appmemory",
     "localStorage": "appmemory",

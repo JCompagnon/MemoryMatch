@@ -53,6 +53,19 @@
       <SubType>Code</SubType>
     </Content>
     <Content Include="client\README.md" />
+    <Content Include="client\sampleimages\balloon.png" />
+    <Content Include="client\sampleimages\butterfly.png" />
+    <Content Include="client\sampleimages\cat.png" />
+    <Content Include="client\sampleimages\deer.png" />
+    <Content Include="client\sampleimages\elephant.png" />
+    <Content Include="client\sampleimages\fish.png" />
+    <Content Include="client\sampleimages\flower.png" />
+    <Content Include="client\sampleimages\horse.png" />
+    <Content Include="client\sampleimages\moon.png" />
+    <Content Include="client\sampleimages\radish.png" />
+    <Content Include="client\sampleimages\skelhand.png" />
+    <Content Include="client\sampleimages\tree.png" />
+    <Content Include="client\sampleimages\vulture.png" />
     <Content Include="common\models\game-images.json" />
     <Content Include="common\models\scores.json" />
     <Content Include="package.json" />
@@ -66,6 +79,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="client\" />
+    <Folder Include="client\sampleimages\" />
     <Folder Include="common\" />
     <Folder Include="common\models\" />
     <Folder Include="server\" />

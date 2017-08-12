@@ -1,4 +1,4 @@
-*.csv
+﻿*.csv
 *.dat
 *.iml
 *.log
@@ -10,6 +10,7 @@
 *.swp
 *.tgz
 *.xml
+*.png
 .DS_Store
 .idea
 .project

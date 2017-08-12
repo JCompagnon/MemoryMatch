@@ -18,7 +18,7 @@
     "public": true
   },
   "GameImages": {
-    "dataSource": "appmemory",
+    "dataSource": "gameimages",
     "public": true
   }
 }
