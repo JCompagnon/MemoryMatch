@@ -1,4 +1,4 @@
-﻿.menu > .row{
+.menu > .row{
   
 }
 
@@ -7,7 +7,8 @@
 }
 
 .obscured{
-  background-color:blanchedalmond;
+  background-image:url("sampleimages/questionmark.png");
+  background-size:75%;
   background-clip:content-box;
   border-radius:5px;
 }
@@ -16,19 +17,14 @@
   visibility:hidden
 }
 
-/*img{
-  height:100%;width:100%;
+body{
+  background-color:#0D022C;
 }
-.imagecontainer {
-    height: 180px
-  }*/
-/*@media (max-width: 1199px){
-  
+.header{
+  color:#665c7e;
 }
-@media (min-resolution: 1200px) {
-  .imagecontainer {
-    height: 15em !important;
-
-  note: height-480 looks fine on phones, height-300 probably better for desktop
-  }
-}*/
+.maincontent{
+  background-color:#665c7e;
+  color:#050111;
+  border-radius:15px
+}

@@ -62,6 +62,7 @@
     <Content Include="client\sampleimages\flower.png" />
     <Content Include="client\sampleimages\horse.png" />
     <Content Include="client\sampleimages\moon.png" />
+    <Content Include="client\sampleimages\questionmark.png" />
     <Content Include="client\sampleimages\radish.png" />
     <Content Include="client\sampleimages\skelhand.png" />
     <Content Include="client\sampleimages\tree.png" />

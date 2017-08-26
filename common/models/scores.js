@@ -1,7 +1,14 @@
-﻿'use strict';
+'use strict';
 
-module.exports = function(Score) {
-    Score.addScore = function (score, player, callback) {
-        Score.create({ player: player, score: score });
+module.exports = function (Score) {
+
+    Score.remoteMethod('deleteScores', {
+        accepts: [{ arg: 'scoreIDs', type: 'array', description: 'Set of IDs to be deleted' }]
+    });
+    Score.deleteScores = function (scoreIDs) {
+        if (scoreIDs.length) {
+            //not working
+            Score.destroyAll({ id: { inq: scoreIDs } });
+        }
     }
 };
