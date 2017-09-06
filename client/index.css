@@ -8,9 +8,10 @@
 
 .obscured{
   background-image:url("sampleimages/questionmark.png");
-  background-size:75%;
-  background-clip:content-box;
+  background-size:contain;
   border-radius:5px;
+  /*border-style:solid;*/
+    
 }
 
 .obscured > img{
@@ -18,13 +19,19 @@
 }
 
 body{
-  background-color:#0D022C;
+  background-color:#faeded;
 }
 .header{
-  color:#665c7e;
+  color:#4e2323;
 }
 .maincontent{
-  background-color:#665c7e;
+  background-color:#d9d9d9;
   color:#050111;
-  border-radius:15px
+  border-radius:10px
 }
+/*
+  blue
+  bg:#0D022C
+  center bg:#665c7e
+  bg text::#665c7e
+*/

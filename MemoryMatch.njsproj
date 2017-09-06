@@ -28,6 +28,7 @@
     <DebugSymbols>true</DebugSymbols>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="client\utils.js" />
     <Compile Include="client\index.js">
       <SubType>Code</SubType>
     </Compile>

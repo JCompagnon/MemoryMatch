@@ -1,4 +1,4 @@
-﻿'use strict';
+'use strict';
 
 module.exports = function (GameImages) {
 
@@ -36,5 +36,5 @@ module.exports = function (GameImages) {
                 cb(null, pics);
             });            
         });
-    };   
+    };
 };

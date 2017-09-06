@@ -25,7 +25,8 @@ var app = new Vue({
         ]
     },
     methods: {
-        startGame: function (event) {
+        startGame: function (newGameClick) {
+            app.gameInfo.images.splice(0);
             axios.post('/api/gameimages/getImages', {
                 number: app.selectedDiff
             }).then(function (response) {
@@ -33,7 +34,10 @@ var app = new Vue({
                 app.gameInfo.imagecount = result.length;
                 app.gameInfo.images = app.prepareImages(result);
                 app.matchedPairs = [];
-                app.startTimer();
+                if (newGameClick) {
+                    app.startTimer();
+                    app.playerScore = 0;
+                }
                 }).catch(function (err) { console.log(err) });
             app.playerName = document.getElementById('name') ? document.getElementById('name').value : '';
             //(for now) hide menu, replace with blocks for each image, add button to close game / return to menu
@@ -59,7 +63,7 @@ var app = new Vue({
                         app.matchedPairs.push(...app.gameInfo.images.filter((s) => s.id === img.getAttribute('id') || s.id === app.shownImage.id).map((s) => s.id));
                         app.shownImage = undefined;
                         if (app.matchedPairs.length == (app.gameInfo.imagecount * 2)) {
-                            app.endGame();
+                            setTimeout(app.startGame,500);
                         }
                     }
                     else {
@@ -87,22 +91,9 @@ var app = new Vue({
             for (var x = 0; x < images.length; x++) {
                 newArr.push(images[x]);
                 newArr.push({ sourceurl: images[x].sourceurl, id: images[x].id + '2' });
-            }
-            app.shuffleArray(newArr);
-            return newArr;
+            }            
+            return UtilityMethods.shuffleArray(newArr);
         },
-        shuffleArray: function (arr) {
-            let counter = arr.length;
-            for (let i = 0; i < arr.length; i++) {
-                let index = Math.floor(Math.random() * counter);
-                counter--;
-
-                let temp = arr[counter];
-                arr[counter] = arr[index];
-                arr[index] = temp;
-            }
-        },
-
         startTimer: function () {
             app.scoreMultiplier = 6;
 
@@ -110,8 +101,11 @@ var app = new Vue({
         },
         reduceMultiplier: function () {
             if (app.scoreMultiplier > 1) {
-                app.scoreMultiplier--;
-                setTimeout(app.reduceMultiplier, 10000);
+                --app.scoreMultiplier;
+                setTimeout(app.reduceMultiplier, 5000);
+            }
+            else if (app.scoreMultiplier === 1) {
+                app.endGame();
             }
         },
         endGame: function () {
@@ -137,3 +131,5 @@ var app = new Vue({
         }
     }
 });
+
+

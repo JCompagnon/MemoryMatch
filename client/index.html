@@ -4,6 +4,7 @@
   <meta charset="utf-8" />
   <title>Loopback demo</title>
   <script src="vue.js"></script>
+  <script src="utils.js"></script>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
   <link rel="stylesheet" href="index.css" />
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
@@ -22,84 +23,84 @@
           <h3>Score</h3>
         </div>
       </div>
-    </div>
-    <div class="row">
-      <div class="col-md-3 leftbar">
-        &nbsp;
-      </div>
-      <div class="col-md-6 col-sm-12 maincontent text-center">
-        <div>
-          <div class="row">
-            <div class="col-md-12 form-label">
-              <h3>{{ titleLabel }}</h3>
-            </div>
-          </div>
-
-          <div id="imgModal" class="modal"></div>
-
-          <div class="menu row" v-if="currentScreen === 'menu'">
-            <div class="col-lg-6">
-              <div class="row">
-                <div class="col-md-12 form-group">
-                  <input class="form-control" type="text" id="name" placeholder="Name..." />
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-md-12 form-group">
-                  <select v-model="selectedDiff" class="form-control">
-                    <option disabled>Please select a difficulty</option>
-                    <option v-for="diff in difficulties" v-bind:value="diff.id"> {{ diff.text }} </option>
-                  </select>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-sm-12 center form-group">
-                  <button class="btn btn-primary form-control" v-on:click="startGame"> {{ newGameLabel }}</button>
-                </div>
+      <div class="row">
+        <div class="col-md-3 leftbar">
+          &nbsp;
+        </div>
+        <div class="col-md-6 col-sm-12 maincontent text-center">
+          <div>
+            <div class="row">
+              <div class="col-md-12 form-label">
+                <h3>{{ titleLabel }}</h3>
               </div>
             </div>
-          </div>
 
-          <div class="gameboard row" v-if="currentScreen === 'game'">
-            <div class="col-sm-12">
-              <div class="row">
-                <div v-if="gameInfo.imagecount" class="col-sm-12 form-group">
-                  <p>{{ gameInfo.imagecount }} images received</p>
-                  <div class="row">
-                    <div v-for="image in gameInfo.images" v-on:click="selectImage" class="col-xs-6 col-md-3 p-5 obscured imagecontainer">
-                      <img class="img-responsive" :src="image.sourceurl" :alt="image.sourceurl" v-bind:id="image.id" />
-                    </div>
+            <div id="imgModal" class="modal"></div>
+
+            <div class="menu row" v-if="currentScreen === 'menu'">
+              <div class="col-lg-6 col-lg-offset-3">
+                <div class="row">
+                  <div class="col-md-12 form-group">
+                    <input class="form-control" type="text" placeholder="Name..." v-model="playerName" />
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-12 form-group">
+                    <select v-model="selectedDiff" class="form-control">
+                      <option disabled>Please select a difficulty</option>
+                      <option v-for="diff in difficulties" v-bind:value="diff.id"> {{ diff.text }} </option>
+                    </select>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-sm-12 center form-group">
+                    <button class="btn btn-primary form-control" v-on:click="startGame"> {{ newGameLabel }}</button>
                   </div>
                 </div>
               </div>
-              <div class="row">
-                <div class="col-sm-12 form-group">
-                  <button class="btn btn-warning form-control" v-on:click="quitGame"> {{ quitGameLabel }}</button>
+            </div>
+
+            <div class="gameboard row" v-if="currentScreen === 'game'">
+              <div class="col-sm-12">
+                <div class="row">
+                  <div v-if="gameInfo.imagecount" class="col-sm-12 form-group">
+                    <p>{{ gameInfo.imagecount }} images received</p>
+                    <div class="row">
+                      <div v-for="image in gameInfo.images" v-on:click="selectImage" class="col-xs-6 col-md-3 p-5 obscured imagecontainer">
+                        <img class="img-responsive" :src="image.sourceurl" :alt="image.sourceurl" v-bind:id="image.id" />
+                      </div>
+                    </div>
+                  </div>
                 </div>
+                <div class="row">
+                  <div class="col-sm-12 form-group">
+                    <button class="btn btn-warning form-control" v-on:click="quitGame"> {{ quitGameLabel }}</button>
+                  </div>
+                </div>
+
               </div>
 
             </div>
 
-          </div>
-
-          <div class="scoreScreen row" v-if="currentScreen === 'highScores'">
-            <div class="col-sm-6">
-              <div class="row" v-for="item in highScores">
-                <div class="col-sm-6">{{item.player}}</div>
-                <div class="col-sm-6 text-right">{{item.score}}</div>
-              </div>
-              <div class="row">
-                <div class="col-sm-12 form-group">
-                  <button class="btn btn-warning form-control" v-on:click="startGame"> {{ newGameLabel }}</button>
+            <div class="scoreScreen row" v-if="currentScreen === 'highScores'">
+              <div class="col-sm-6">
+                <div class="row" v-for="item in highScores">
+                  <div class="col-sm-6">{{item.player}}</div>
+                  <div class="col-sm-6 text-right">{{item.score}}</div>
+                </div>
+                <div class="row">
+                  <div class="col-sm-12 form-group">
+                    <button class="btn btn-warning form-control" v-on:click="startGame"> {{ newGameLabel }}</button>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
+
         </div>
-
-      </div>
-      <div class="col-md-3 rightbar">
-        &nbsp;
+        <div class="col-md-3 rightbar">
+          &nbsp;
+        </div>
       </div>
     </div>
   </div>
