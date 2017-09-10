@@ -20,6 +20,10 @@
 
 body{
   background-color:#faeded;
+  font-size:2em
+}
+label{
+  font-size:2em
 }
 .header{
   color:#4e2323;

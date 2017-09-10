@@ -13,6 +13,7 @@ var app = new Vue({
         shownImage: "",
         matchedPairs: [],
         playerScore: 0,
+        timeRemaining: 0,
         scoreMultiplier: 0,
         gameInfo: {
             imagecount: 0,
@@ -25,6 +26,10 @@ var app = new Vue({
         ]
     },
     methods: {
+        onNewGameClick: function () {
+            app.playerName = document.getElementById('playerName').value;
+            app.startGame(true);
+        },
         startGame: function (newGameClick) {
             app.gameInfo.images.splice(0);
             axios.post('/api/gameimages/getImages', {
@@ -39,7 +44,6 @@ var app = new Vue({
                     app.playerScore = 0;
                 }
                 }).catch(function (err) { console.log(err) });
-            app.playerName = document.getElementById('name') ? document.getElementById('name').value : '';
             //(for now) hide menu, replace with blocks for each image, add button to close game / return to menu
             app.currentScreen = "game";
         },
@@ -90,21 +94,28 @@ var app = new Vue({
             var newArr = [];
             for (var x = 0; x < images.length; x++) {
                 newArr.push(images[x]);
-                newArr.push({ sourceurl: images[x].sourceurl, id: images[x].id + '2' });
+                newArr.push({ sourceurl: images[x].sourceurl, id: images[x].id.split('').reverse().join('') });
             }            
             return UtilityMethods.shuffleArray(newArr);
         },
         startTimer: function () {
             app.scoreMultiplier = 6;
-
+            app.timeRemaining = 30;
+            app.reduceTime();
             app.reduceMultiplier();
         },
+        reduceTime: function () {
+            if (app.timeRemaining > 0) {
+                app.timeRemaining--;
+                setTimeout(app.reduceTime,1000)
+            }
+        },
         reduceMultiplier: function () {
-            if (app.scoreMultiplier > 1) {
-                --app.scoreMultiplier;
+            if (app.scoreMultiplier > 0) {
+                app.scoreMultiplier--;
                 setTimeout(app.reduceMultiplier, 5000);
             }
-            else if (app.scoreMultiplier === 1) {
+            else{
                 app.endGame();
             }
         },
@@ -124,9 +135,7 @@ var app = new Vue({
             //gets a list of all ids of the currently-held scores and deletes the lot
             //should probably write a better method to destroy large numbers of records - too many requests, maaan
             axios.get('/api/scores').then(function (result) {
-                result.data.map(s => s.id).forEach(function (id) {
-                    axios.delete('/api/scores/'+id);
-                });
+                axios.post('/api/scores/deletescores', { scoreIDs: result.data.map(s => s.id) });
             });
         }
     }

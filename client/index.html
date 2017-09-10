@@ -13,35 +13,33 @@
   <div id="app">
     <div class="container-fluid">
       <div class="row header">
-        <div class="col-sm-4 text-left">
-          <h3>Name</h3>
-        </div>
-        <div class="col-sm-4 text-center">
-          <h2>Memory Match</h2>
-        </div>
-        <div class="col-sm-4 text-right">
-          <h3>Score</h3>
+        <div class="col-sm-4 col-sm-offset-4 text-center">
+          <h2>{{titleLabel}}</h2>
         </div>
       </div>
       <div class="row">
         <div class="col-md-3 leftbar">
           &nbsp;
         </div>
-        <div class="col-md-6 col-sm-12 maincontent text-center">
-          <div>
+        <div class="col-md-6 col-sm-12 maincontent text-center panel">
+          <div class="panel-heading">
             <div class="row">
-              <div class="col-md-12 form-label">
-                <h3>{{ titleLabel }}</h3>
+              <div class="col-sm-4 text-left">
+                <label>{{playerName}}</label>
+              </div>
+              <div class="col-sm-4 col-sm-offset-4 text-right">
+                <label>Score: {{playerScore}}<br />Time Remaining: {{timeRemaining}}</label>
               </div>
             </div>
 
-            <div id="imgModal" class="modal"></div>
-
+          </div>
+          <div class="panel-body">
+            <!-- TODO: show image in modal for 1sec on click<div id="imgModal" class="modal"></div>-->
             <div class="menu row" v-if="currentScreen === 'menu'">
               <div class="col-lg-6 col-lg-offset-3">
                 <div class="row">
                   <div class="col-md-12 form-group">
-                    <input class="form-control" type="text" placeholder="Name..." v-model="playerName" />
+                    <input class="form-control" type="text" placeholder="Name..." id="playerName" />
                   </div>
                 </div>
                 <div class="row">
@@ -54,7 +52,7 @@
                 </div>
                 <div class="row">
                   <div class="col-sm-12 center form-group">
-                    <button class="btn btn-primary form-control" v-on:click="startGame"> {{ newGameLabel }}</button>
+                    <button class="btn btn-primary form-control" v-on:click="onNewGameClick"> {{ newGameLabel }}</button>
                   </div>
                 </div>
               </div>
@@ -64,7 +62,7 @@
               <div class="col-sm-12">
                 <div class="row">
                   <div v-if="gameInfo.imagecount" class="col-sm-12 form-group">
-                    <p>{{ gameInfo.imagecount }} images received</p>
+                    <!--<p>{{ gameInfo.imagecount }} images received</p>-->
                     <div class="row">
                       <div v-for="image in gameInfo.images" v-on:click="selectImage" class="col-xs-6 col-md-3 p-5 obscured imagecontainer">
                         <img class="img-responsive" :src="image.sourceurl" :alt="image.sourceurl" v-bind:id="image.id" />
@@ -73,30 +71,27 @@
                   </div>
                 </div>
                 <div class="row">
-                  <div class="col-sm-12 form-group">
+                  <div class="col-sm-4 col-sm-offset-4 form-group">
                     <button class="btn btn-warning form-control" v-on:click="quitGame"> {{ quitGameLabel }}</button>
                   </div>
                 </div>
-
               </div>
-
             </div>
 
             <div class="scoreScreen row" v-if="currentScreen === 'highScores'">
-              <div class="col-sm-6">
+              <div class="col-sm-12">
                 <div class="row" v-for="item in highScores">
                   <div class="col-sm-6">{{item.player}}</div>
                   <div class="col-sm-6 text-right">{{item.score}}</div>
                 </div>
                 <div class="row">
-                  <div class="col-sm-12 form-group">
+                  <div class="col-sm-4 col-sm-offset-4 form-group">
                     <button class="btn btn-warning form-control" v-on:click="startGame"> {{ newGameLabel }}</button>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-
         </div>
         <div class="col-md-3 rightbar">
           &nbsp;
