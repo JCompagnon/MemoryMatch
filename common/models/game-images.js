@@ -26,15 +26,15 @@ module.exports = function (GameImages) {
 
             //Temporary swapping of returned image urls to locally hosted ones (retrievved from )
 
-            let fs = require('fs');
+            //let fs = require('fs');
 
-            fs.readdir("./client/sampleimages", function (err, files) {
-                for (let s = 0; s < files.length && s < pics.length; s++) {
-                    pics[s].sourceurl = "/sampleimages/" + files[s];
-                }
+            //fs.readdir("./client/sampleimages", function (err, files) {
+            //    for (let s = 0; s < files.length && s < pics.length; s++) {
+            //        pics[s].sourceurl = "/sampleimages/" + files[s];
+            //    }
+            //});
 
-                cb(null, pics);
-            });            
+                cb(null, pics);            
         });
     };
 };
