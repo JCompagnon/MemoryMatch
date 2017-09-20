@@ -20,9 +20,9 @@ var app = new Vue({
             images: []
         },
         difficulties: [
-            { text: "Easy", id: 4 },
-            { text: "Normal", id: 16 },
-            { text: "Hard", id: 20 },
+            { text: "Easy", id: 8 },
+            { text: "Normal", id: 12 },
+            { text: "Hard", id: 16 },
         ]
     },
     methods: {
@@ -32,17 +32,17 @@ var app = new Vue({
         },
         startGame: function (newGameClick) {
             app.gameInfo.images.splice(0);
-            axios.post('/api/gameimages/getImages', {
-                number: app.selectedDiff
-            }).then(function (response) {
-                var result = response.data.result;
-                app.gameInfo.imagecount = result.length;
-                app.gameInfo.images = app.prepareImages(result);
-                app.matchedPairs = [];
-                if (newGameClick) {
-                    app.startTimer();
-                    app.playerScore = 0;
-                }
+            let filter = { order: 'timesused ASC', limit: app.selectedDiff };
+            axios.get('api/gameimages?filter=' + JSON.stringify(filter))
+                .then(function (response) {
+                    let result = response.data;
+                    app.gameInfo.imagecount = result.length;
+                    app.gameInfo.images = app.prepareImages(result);
+                    app.matchedPairs = [];
+                    if (newGameClick) {
+                        app.startTimer();
+                        app.playerScore = 0;
+                    }
                 }).catch(function (err) { console.log(err) });
             //(for now) hide menu, replace with blocks for each image, add button to close game / return to menu
             app.currentScreen = "game";
@@ -67,7 +67,7 @@ var app = new Vue({
                         app.matchedPairs.push(...app.gameInfo.images.filter((s) => s.id === img.getAttribute('id') || s.id === app.shownImage.id).map((s) => s.id));
                         app.shownImage = undefined;
                         if (app.matchedPairs.length == (app.gameInfo.imagecount * 2)) {
-                            setTimeout(app.startGame,500);
+                            setTimeout(app.startGame, 500);
                         }
                     }
                     else {
@@ -95,7 +95,7 @@ var app = new Vue({
             for (var x = 0; x < images.length; x++) {
                 newArr.push(images[x]);
                 newArr.push({ sourceurl: images[x].sourceurl, id: images[x].id.split('').reverse().join('') });
-            }            
+            }
             return UtilityMethods.shuffleArray(newArr);
         },
         startTimer: function () {
@@ -107,7 +107,7 @@ var app = new Vue({
         reduceTime: function () {
             if (app.timeRemaining > 0) {
                 app.timeRemaining--;
-                setTimeout(app.reduceTime,1000)
+                setTimeout(app.reduceTime, 1000)
             }
         },
         reduceMultiplier: function () {
@@ -115,7 +115,7 @@ var app = new Vue({
                 app.scoreMultiplier--;
                 setTimeout(app.reduceMultiplier, 5000);
             }
-            else{
+            else {
                 app.endGame();
             }
         },
@@ -123,12 +123,12 @@ var app = new Vue({
             axios.post('/api/scores', {
                 player: (app.playerName || 'anon'),
                 score: app.playerScore
-            }).then(function () {
-                axios.get('/api/scores').then(function (result) {
-                    app.highScores = result.data.sort((a,b)=>b.score-a.score);
-                    setTimeout(() => { app.currentScreen = 'highScores' }, 0);
+            }).then(function (postRes) {
+                axios.get('/api/scores').then(function (getRes) {
+                    app.highScores = getRes.data.sort((a, b) => b.score - a.score);
+                    setTimeout(() => { app.currentScreen = 'highScores'; setTimeout(() => { document.getElementById(postRes.data.id).scrollIntoView(); }, 0) }, 0);
                 })
-            });            
+            });
         },
         //what why not have this in client side code?
         destroyTestScores: function () {

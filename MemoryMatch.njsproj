@@ -38,9 +38,6 @@
     <Compile Include="server\boot\loadImages.js">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="server\sample-images.json">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="server\server.js" />
     <Content Include=".editorconfig" />
     <Content Include=".eslintignore" />
@@ -75,6 +72,9 @@
     <Content Include="server\component-config.json" />
     <Content Include="server\config.json" />
     <Content Include="server\datasources.json" />
+    <Content Include="server\sampleimages.json">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="server\middleware.development.json" />
     <Content Include="server\middleware.json" />
     <Content Include="server\model-config.json" />

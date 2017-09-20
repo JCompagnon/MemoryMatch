@@ -10,31 +10,15 @@ module.exports = function (GameImages) {
     GameImages.getImages = function (number, theme, cb) {
         //what are you talking about I totally know what I'm doing         
         //var themedPics = 
-        GameImages.find({ where: { themes: theme }, limit: number }, function (err, pics) {            
-            //TODO: add randomizing code
-            //now that it's here do we want it here? this might be more game app logic than api's concern... welp... here we are
-            //reference https://blog.codinghorror.com/the-danger-of-naivete/
-            //let counter = pics.length;
-            //for (let i = 0; i < pics.length; i++) {
-            //    let index = Math.floor(Math.random() * counter);
-            //    counter--;
-
-            //    let temp = pics[counter];
-            //    pics[counter] = pics[index];
-            //    pics[index] = temp;
-            //}
-
-            //Temporary swapping of returned image urls to locally hosted ones (retrievved from )
-
-            //let fs = require('fs');
-
-            //fs.readdir("./client/sampleimages", function (err, files) {
-            //    for (let s = 0; s < files.length && s < pics.length; s++) {
-            //        pics[s].sourceurl = "/sampleimages/" + files[s];
-            //    }
-            //});
-
-                cb(null, pics);            
+        GameImages.find({ where: { themes: theme }, order: 'timesused ASC', limit: number }, function (err, pics) {
+            cb(null, pics);
         });
     };
+    //Each time a game image is retrieved through our server, update the counter on it
+    GameImages.afterRemote('getImages', function (context, otherVar, next) {
+        let imagesToUpdate = otherVar.result.map((img)=>img.id);
+
+        GameImages.updateAll({ id: { inq: imagesToUpdate } }, { $inc: { timesused: 1 } }, function (error, info) { if (error) throw error; console.log(info.count); });
+        next();
+    });
 };

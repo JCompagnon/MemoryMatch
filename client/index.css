@@ -39,3 +39,7 @@ label{
   center bg:#665c7e
   bg text::#665c7e
 */
+.scoreScreen{
+  max-height:20em;
+  overflow-y:auto
+}
