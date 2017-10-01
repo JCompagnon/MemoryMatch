@@ -1,7 +1,3 @@
-.menu > .row{
-  
-}
-
 .p-5{
   padding:.5em
 }
@@ -23,7 +19,7 @@ body{
   font-size:2em
 }
 label{
-  font-size:2em
+  font-size:1em
 }
 .header{
   color:#4e2323;
@@ -39,7 +35,14 @@ label{
   center bg:#665c7e
   bg text::#665c7e
 */
-.scoreScreen{
+.listing{
   max-height:20em;
-  overflow-y:auto
+  overflow-y:auto;
+  font-family:monospace, 'Baskerville Old Face';
+  text-transform:uppercase;
+  overflow-x:hidden;
+  margin-bottom:1em;
+}
+.listing .row:nth-child(2n){
+  background-color:#a9a9a9;
 }

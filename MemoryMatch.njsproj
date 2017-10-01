@@ -72,12 +72,10 @@
     <Content Include="server\component-config.json" />
     <Content Include="server\config.json" />
     <Content Include="server\datasources.json" />
-    <Content Include="server\sampleimages.json">
-      <SubType>Code</SubType>
-    </Content>
     <Content Include="server\middleware.development.json" />
     <Content Include="server\middleware.json" />
     <Content Include="server\model-config.json" />
+    <Content Include="server\sampleimages.json" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="client\" />

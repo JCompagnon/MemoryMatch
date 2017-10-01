@@ -18,10 +18,10 @@
         </div>
       </div>
       <div class="row">
-        <div class="col-md-3 leftbar">
+        <div class="col-md-2 leftbar">
           &nbsp;
         </div>
-        <div class="col-md-6 col-sm-12 maincontent text-center panel">
+        <div class="col-md-8 col-sm-12 maincontent text-center panel">
           <div class="panel-heading">
             <div class="row">
               <div class="col-sm-4 text-left">
@@ -35,7 +35,7 @@
           </div>
           <div class="panel-body">
             <!-- TODO: show image in modal for 1sec on click<div id="imgModal" class="modal"></div>-->
-            <div class="menu row" v-if="currentScreen === 'menu'">
+            <div class="menu row" v-if="currentScreen === screens.menu"> <!---->
               <div class="col-lg-6 col-lg-offset-3">
                 <div class="row">
                   <div class="col-md-12 form-group">
@@ -58,13 +58,13 @@
               </div>
             </div>
 
-            <div class="gameboard row" v-if="currentScreen === 'game'">
+            <div class="gameboard row" v-if="currentScreen === screens.game"><!--  -->
               <div class="col-sm-12">
                 <div class="row">
                   <div v-if="gameInfo.imagecount" class="col-sm-12 form-group">
                     <!--<p>{{ gameInfo.imagecount }} images received</p>-->
                     <div class="row">
-                      <div v-for="image in gameInfo.images" v-on:click="selectImage" class="col-xs-6 col-md-3 p-5 obscured imagecontainer">
+                      <div v-for="image in gameInfo.images" v-on:click="selectImage" class="col-xs-3 col-md-2 p-5 obscured imagecontainer">
                         <img class="img-responsive" :src="image.sourceurl" :alt="image.sourceurl" v-bind:id="image.id" />
                       </div>
                     </div>
@@ -78,24 +78,24 @@
               </div>
             </div>
 
-            <div class="scoreScreen row" v-if="currentScreen === 'highScores'">
+            <div class="scoreScreen row" v-if="currentScreen === screens.highScores"><!--  -->
               <div class="col-sm-12">
-                <div class="row" v-for="item in highScores" v-bind:id="item.id">
-                  <div class="col-sm-6">{{item.player}}</div>
-                  <div class="col-sm-6 text-right">{{item.score}}</div>
+                <div class="listing">
+                  <div class="row" v-for="item in highScores" v-bind:id="item.id">
+                    <div class="col-sm-6 text-left">{{item.player}}</div>
+                    <div class="col-sm-6 text-right">{{item.score}}</div>
+                  </div>
                 </div>
-                <div class="col=sm-12">
-                  <div class="row">
-                    <div class="col-sm-4 col-sm-offset-4 form-group">
-                      <button class="btn btn-warning form-control" v-on:click="startGame"> {{ newGameLabel }}</button>
-                    </div>
+                <div class="row">
+                  <div class="col-sm-4 col-sm-offset-4 form-group">
+                    <button class="btn btn-warning form-control" v-on:click="startGame"> {{ newGameLabel }}</button>
                   </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <div class="col-md-3 rightbar">
+        <div class="col-md-2 rightbar">
           &nbsp;
         </div>
       </div>

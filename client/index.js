@@ -1,8 +1,7 @@
 var app = new Vue({
     el: "#app",
     data: {
-        hello: "Hello, world!",
-        welcome: "Welcome to Vue",
+        screens: { highScores: 'highScores', menu:'menu', game:'game'},
         titleLabel: "Memory Match",
         newGameLabel: "New game",
         quitGameLabel: "Quit",
@@ -120,15 +119,7 @@ var app = new Vue({
             }
         },
         endGame: function () {
-            axios.post('/api/scores', {
-                player: (app.playerName || 'anon'),
-                score: app.playerScore
-            }).then(function (postRes) {
-                axios.get('/api/scores').then(function (getRes) {
-                    app.highScores = getRes.data.sort((a, b) => b.score - a.score);
-                    setTimeout(() => { app.currentScreen = 'highScores'; setTimeout(() => { document.getElementById(postRes.data.id).scrollIntoView(); }, 0) }, 0);
-                })
-            });
+            app.showScores(true);
         },
         //what why not have this in client side code?
         destroyTestScores: function () {
@@ -137,6 +128,27 @@ var app = new Vue({
             axios.get('/api/scores').then(function (result) {
                 axios.post('/api/scores/deletescores', { scoreIDs: result.data.map(s => s.id) });
             });
+        },
+        showScores: function (gameEnded) {
+            if (gameEnded) {
+                axios.post('/api/scores', {
+                    player: (app.playerName || 'anon'),
+                    score: app.playerScore
+                }).then(function (postRes) {
+                    let ignoreZeros = { where: { "score": { "gt": "0" } } };
+                    axios.get('/api/scores?filter=' + JSON.stringify(ignoreZeros)).then(function (getRes) {
+                        app.highScores = getRes.data.sort((a, b) => b.score - a.score);
+                        setTimeout(() => { app.currentScreen = 'highScores'; setTimeout(() => { document.getElementById(postRes.data.id).scrollIntoView(); }, 0) }, 0);
+                    });
+                });
+            }
+            else {
+                let ignoreZeros = { where: { "score": { "gt": "0" } } };
+                axios.get('/api/scores?filter=' + JSON.stringify(ignoreZeros)).then(function (getRes) {
+                    app.highScores = getRes.data.sort((a, b) => b.score - a.score);
+                    app.currentScreen = 'highScores';
+                });
+            }
         }
     }
 });
