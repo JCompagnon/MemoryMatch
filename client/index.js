@@ -42,11 +42,16 @@ var app = new Vue({
                         app.startTimer();
                         app.playerScore = 0;
                     }
+                    else {
+                        //Add bonus time if player scored the board
+                        app.timeRemaining += 15;
+                        app.scoreMultiplier += 3;
+                    }
                 }).catch(function (err) { console.log(err) });
             //(for now) hide menu, replace with blocks for each image, add button to close game / return to menu
             app.currentScreen = "game";
         },
-        quitGame: function (e) {
+        quitGame: function () {
             app.currentScreen = "menu";
         },
         selectImage: function (e) {
@@ -60,8 +65,6 @@ var app = new Vue({
                     if (app.shownImage.src === img.getAttribute('src') && app.shownImage.id != img.getAttribute('id')) {
                         app.playerScore += (app.scoreMultiplier * 2);
                         console.log('image matched! Score: ' + app.playerScore);
-                        //woopwoop refactor this what is wrong with you for god's sake man.
-                        //also you should probably remove the images that matched
                         //CHANGE OF PLAN we'll just not let anything interact with paired images
                         app.matchedPairs.push(...app.gameInfo.images.filter((s) => s.id === img.getAttribute('id') || s.id === app.shownImage.id).map((s) => s.id));
                         app.shownImage = undefined;
@@ -85,14 +88,13 @@ var app = new Vue({
                     app.shownImage = { id: img.getAttribute('id'), src: img.getAttribute('src') }
                 }
             }
-
         },
-
         prepareImages: function (images) {
             //images should also have an id so that we can compare if the id differs
             var newArr = [];
             for (var x = 0; x < images.length; x++) {
                 newArr.push(images[x]);
+                //sets the paired 
                 newArr.push({ sourceurl: images[x].sourceurl, id: images[x].id.split('').reverse().join('') });
             }
             return UtilityMethods.shuffleArray(newArr);

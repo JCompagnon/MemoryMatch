@@ -3,7 +3,7 @@
 }
 
 .obscured{
-  background-image:url("sampleimages/questionmark.png");
+  background-image:url("img/questionmark.png");
   background-size:contain;
   border-radius:5px;
   /*border-style:solid;*/
